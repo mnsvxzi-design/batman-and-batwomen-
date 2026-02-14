@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will You Be My Valentine? 🦇🐱</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .container {
+      max-width: 85%;
+      padding: 30px;
+      background: rgba(20, 20, 20, 0.85);
+      border-radius: 25px;
+      border: 3px solid #ffcc00;
+      box-shadow: 0 0 40px rgba(255, 204, 0, 0.4);
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      font-size: 2.8em;
+      margin: 0.5em 0;
+      color: #fff;
+      text-shadow: 0 0 15px #ffcc00;
+    }
+    .buttons {
+      margin: 2em 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    button {
+      font-size: 1.6em;
+      padding: 15px 45px;
+      margin: 10px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      min-width: 140px;
+    }
+    #yes {
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+    }
+    #yes:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px #ffcc00;
+    }
+    #no {
+      background: #333;
+      color: #fff;
+    }
+    #no:hover {
+      background: #555;
+      transform: scale(1.05);
+    }
+    .heart-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: -1;
+      background: url('https://github.com/mnsvxzi-design/batman-and-batwomen-/blob/main/image.jpg?raw=true') center/cover no-repeat;
+      opacity: 0.15;
+      filter: brightness(0.8) hue-rotate(40deg); /* subtle yellow tint */
+    }
+    .message {
+      font-size: 1.9em;
+      margin-top: 1.5em;
+      color: #ffcc00;
+      min-height: 120px;
+      line-height: 1.4;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+    img.valentine-img {
+      max-width: 60%;
+      width: auto;
+      height: auto;
+      border-radius: 15px;
+      margin: 1em auto;
+      display: block;
+      box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="heart-bg"></div>
+  <div class="container">
+    <h1>Will you be my Valentine? 🦇❤️🐱</h1>
+    
+    <img src="https://github.com/mnsvxzi-design/batman-and-batwomen-/blob/main/image.jpg?raw=true" alt="Batman & Catwoman" class="valentine-img">
+    
+    <div class="buttons">
+      <button id="no">No</button>
+      <button id="yes">Yes</button>
+    </div>
+    
+    <div id="response" class="message"></div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yes');
+    const noBtn = document.getElementById('no');
+    const response = document.getElementById('response');
+
+    let noClickCount = 0;
+    const maxGrowth = 5;
+
+    // No button just counts clicks (no movement)
+    noBtn.addEventListener('click', () => {
+      if (noClickCount < maxGrowth) {
+        noClickCount++;
+        const scale = 1 + (noClickCount * 0.4); // grows Yes up to ~3x
+        yesBtn.style.transform = `scale(${scale})`;
+        yesBtn.style.padding = `${15 + noClickCount*10}px ${45 + noClickCount*20}px`;
+        yesBtn.style.fontSize = `${1.6 + noClickCount*0.4}em`;
+      }
+
+      response.textContent = "Come on... you know you want to say Yes 😏🖤";
+    });
+
+    // Yes button shows messages
+    yesBtn.addEventListener('click', () => {
+      response.innerHTML = 
+        "I love you so much, Catwoman! 🐾❤️<br>" +
+        "I can't wait to spend the rest of my life loving you<br>" +
+        "<strong>- from your lover for life, Batman 🦇</strong>";
+      
+      noBtn.style.display = 'none';           // hide No after Yes
+      yesBtn.style.animation = 'pulse 1.5s infinite';
+      yesBtn.disabled = true;
+      yesBtn.style.cursor = 'default';
+    });
+  </script>
+</body>
+</html>
